@@ -24,7 +24,7 @@
     <header id="header" class="site-header">
         <div class="nav-container">
             <a href="#home" class="logo">
-                <span class="logo-name">Anmol</span><span class="logo-dot">.</span><span class="logo-role">ai</span>
+                <span class="logo-name">Anmol Srivastava</span>
             </a>
 
             <!-- Desktop Navigation Links -->
@@ -41,10 +41,13 @@
             </nav>
 
             <div class="header-actions">
-                <!-- Resume Download / View Link -->
-                <a href="./Anmol_Srivastava_Resume.pdf" target="_blank" class="nav-resume-btn" title="View updated CV">
-                    <span>Resume</span>
-                    <i class="fa-solid fa-arrow-up-right-from-square"></i>
+                <!-- Resume Modal & Download Links -->
+                <button id="open-cv-modal-btn" class="nav-resume-btn" title="Preview Resume in Modal">
+                    <i class="fa-solid fa-file-pdf"></i>
+                    <span>CV Preview</span>
+                </button>
+                <a href="./Anmol_Srivastava_Resume.pdf" download="Anmol_Srivastava_Resume.pdf" class="nav-resume-download" title="Download Resume PDF">
+                    <i class="fa-solid fa-download"></i>
                 </a>
 
                 <!-- Functional Light / Dark Mode Toggle -->
@@ -66,6 +69,9 @@
     <main>
         <!-- ========================= HERO SECTION ========================= -->
         <section id="home" class="hero-section">
+            <!-- Interactive 3D Canvas Background -->
+            <canvas id="hero-3d-canvas" class="hero-3d-canvas"></canvas>
+
             <div class="hero-container">
                 <div class="hero-content">
                     <div class="status-pill">
@@ -78,7 +84,7 @@
                     </h1>
 
                     <p class="hero-subtitle">
-                        Hi, I'm <strong>Anmol Srivastava</strong> — an engineer specializing in production Large Language Model (LLM) architectures, agentic workflow automation, and enterprise web applications. Currently engineering <strong>SmartHireX</strong> at Intellismith using <strong>Google Vertex AI (Gemini)</strong>, <strong>Watsonx Orchestrate</strong>, and <strong>GCP Cloud Run</strong>.
+                        Hi, I'm <strong>Anmol Srivastava</strong> — an engineer specializing in production Large Language Model (LLM) architectures, agentic workflow automation, and enterprise web applications. Currently engineering an <strong>AI-recruitment platform</strong> and <strong>Agentic HRMS</strong> at Intellismith using <strong>Google Vertex AI (Gemini)</strong>, <strong>IBM Watsonx Orchestrate</strong>, and <strong>GCP Cloud Run</strong>.
                     </p>
 
                     <div class="hero-actions">
@@ -86,13 +92,13 @@
                             <span>Explore Experience</span>
                             <i class="fa-solid fa-arrow-down"></i>
                         </a>
-                        <a href="./Anmol_Srivastava_Resume.pdf" target="_blank" class="btn btn-secondary">
-                            <i class="fa-solid fa-file-pdf"></i>
-                            <span>View CV</span>
-                        </a>
+                        <button id="hero-cv-btn" class="btn btn-secondary">
+                            <i class="fa-solid fa-eye"></i>
+                            <span>Preview CV</span>
+                        </button>
                         <a href="./Anmol_Srivastava_Resume.pdf" download="Anmol_Srivastava_Resume.pdf" class="btn btn-outline" title="Download CV">
                             <i class="fa-solid fa-download"></i>
-                            <span>Download</span>
+                            <span>Download CV</span>
                         </a>
                     </div>
 
@@ -118,18 +124,20 @@
                         <div class="image-wrapper">
                             <img src="./public/anmol-suit.png" alt="Anmol Srivastava - Full Stack AI Engineer" class="hero-img">
                         </div>
-                        <div class="floating-chip chip-top">
-                            <i class="fa-solid fa-brain"></i>
-                            <div>
-                                <span class="chip-title">GenAI & LLMs</span>
-                                <span class="chip-sub">Vertex AI &bull; Gemini</span>
+                        <div class="profile-meta">
+                            <div class="meta-item">
+                                <i class="fa-solid fa-brain"></i>
+                                <div>
+                                    <span class="meta-title">GenAI & LLMs</span>
+                                    <span class="meta-sub">Vertex AI &bull; Gemini</span>
+                                </div>
                             </div>
-                        </div>
-                        <div class="floating-chip chip-bottom">
-                            <i class="fa-solid fa-bolt"></i>
-                            <div>
-                                <span class="chip-title">Agentic Pipelines</span>
-                                <span class="chip-sub">Watsonx &bull; Cloud Run</span>
+                            <div class="meta-item">
+                                <i class="fa-solid fa-bolt"></i>
+                                <div>
+                                    <span class="meta-title">Agentic Pipelines</span>
+                                    <span class="meta-sub">Watsonx &bull; Cloud Run</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,7 +152,7 @@
                     <div class="highlight-icon"><i class="fa-solid fa-robot"></i></div>
                     <div class="highlight-text">
                         <h3>Full Stack AI Engineer</h3>
-                        <p>Intellismith Services &bull; SmartHireX</p>
+                        <p>Intellismith Services &bull; AI-Recruitment & Agentic HRMS</p>
                     </div>
                 </div>
                 <div class="highlight-item">
@@ -183,9 +191,50 @@
                     <div class="about-image-col">
                         <div class="about-image-wrapper">
                             <img src="./public/anmol-casual.jpg" alt="Anmol Srivastava headshot" class="about-img">
-                            <div class="about-badge">
-                                <span class="badge-number">B.Tech</span>
-                                <span class="badge-desc">Electronics & Comm.<br>Thapar Institute</span>
+                        </div>
+                        <div class="about-education-card">
+                            <i class="fa-solid fa-graduation-cap"></i>
+                            <div>
+                                <span class="edu-card-title">B.Tech &bull; Electronics & Comm.</span>
+                                <span class="edu-card-sub">Thapar Institute of Engineering and Technology</span>
+                            </div>
+                        </div>
+
+                        <!-- Interactive 3D Tech Stack Cube Showcase -->
+                        <div class="tech-cube-showcase">
+                            <div class="scene-3d">
+                                <div class="cube-3d" id="tech-cube-3d">
+                                    <div class="cube-face front">
+                                        <i class="fa-solid fa-brain"></i>
+                                        <span>Vertex AI</span>
+                                        <small>Gemini LLMs</small>
+                                    </div>
+                                    <div class="cube-face back">
+                                        <i class="fa-solid fa-robot"></i>
+                                        <span>Watsonx</span>
+                                        <small>Orchestrate</small>
+                                    </div>
+                                    <div class="cube-face right">
+                                        <i class="fa-brands fa-java"></i>
+                                        <span>Spring Boot</span>
+                                        <small>Microservices</small>
+                                    </div>
+                                    <div class="cube-face left">
+                                        <i class="fa-brands fa-react"></i>
+                                        <span>React.js</span>
+                                        <small>Ant Design</small>
+                                    </div>
+                                    <div class="cube-face top">
+                                        <i class="fa-brands fa-python"></i>
+                                        <span>Python</span>
+                                        <small>Flask / ML</small>
+                                    </div>
+                                    <div class="cube-face bottom">
+                                        <i class="fa-solid fa-cloud"></i>
+                                        <span>GCP</span>
+                                        <small>Cloud Run</small>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,7 +244,7 @@
                             I am a <strong>Full-Stack AI Engineer</strong> passionate about turning cutting-edge language models into reliable, high-utility enterprise software.
                         </p>
                         <p>
-                            Currently at <strong>Intellismith</strong>, I lead the technical architecture and delivery of <strong>SmartHireX</strong>, an AI recruitment intelligence platform. My daily work spans designing multi-step agentic workflows with <strong>IBM Watsonx Orchestrate</strong>, building candidate assessment models using <strong>Google Vertex AI (Gemini)</strong>, developing intelligent document OCR parsing pipelines, and deploying fault-tolerant services to <strong>GCP Cloud Run</strong>.
+                            Currently at <strong>Intellismith</strong>, I lead the technical architecture and delivery of an enterprise <strong>AI-recruitment platform</strong> and <strong>Agentic HRMS</strong>. My daily work spans designing multi-step agentic workflows with <strong>IBM Watsonx Orchestrate</strong>, building candidate assessment models using <strong>Google Vertex AI (Gemini)</strong>, developing intelligent document OCR parsing pipelines, and deploying fault-tolerant services to <strong>GCP Cloud Run</strong>.
                         </p>
                         <p>
                             Prior to this, I worked as a Software Developer Intern at <strong>CDAC (Centre for Development of Advanced Computing)</strong> within the Health Informatics & Development Department (HIDD), engineering high-volume Spring Boot microservices, optimizing relational SQL schemas, and building admin dashboards with React.js and Ant Design.
@@ -272,13 +321,13 @@
 
                             <div class="project-flagship">
                                 <div class="flagship-title">
-                                    <i class="fa-solid fa-cube"></i> Key Platform: <strong>SmartHireX</strong> &mdash; AI-Powered Recruitment Intelligence
+                                    <i class="fa-solid fa-cube"></i> Key Platforms: <strong>AI-Recruitment Platform</strong> & <strong>Agentic HRMS</strong>
                                 </div>
                             </div>
 
                             <ul class="timeline-bullets">
                                 <li>
-                                    <strong>AI Product Architecture:</strong> Led end-to-end design and engineering of <em>SmartHireX</em>, integrating generative AI with automated enterprise recruitment pipelines.
+                                    <strong>AI Product Architecture:</strong> Led end-to-end design and engineering of an <em>AI-recruitment platform</em> and <em>Agentic HRMS</em>, integrating generative AI with automated enterprise recruitment pipelines.
                                 </li>
                                 <li>
                                     <strong>LLM Implementation:</strong> Built candidate evaluation engines powered by <strong>Google Vertex AI (Gemini)</strong> to conduct deep semantic analysis, scoring, strengths/gaps profiling, and explainable hiring recommendations.
@@ -493,20 +542,36 @@
                     <span class="section-tag">Featured Work</span>
                     <h2 class="section-heading">Engineered Projects</h2>
                     <p class="section-subtext">Selected AI implementations, machine learning systems, and web applications.</p>
+
+                    <!-- Filter Tabs -->
+                    <div class="project-filters" id="project-filters">
+                        <button class="filter-btn active" data-filter="all">
+                            <i class="fa-solid fa-layer-group"></i> <span>All Work</span>
+                        </button>
+                        <button class="filter-btn" data-filter="ai">
+                            <i class="fa-solid fa-brain"></i> <span>AI & Agentic</span>
+                        </button>
+                        <button class="filter-btn" data-filter="backend">
+                            <i class="fa-solid fa-server"></i> <span>Backend & Systems</span>
+                        </button>
+                        <button class="filter-btn" data-filter="frontend">
+                            <i class="fa-solid fa-laptop-code"></i> <span>Frontend & Web</span>
+                        </button>
+                    </div>
                 </div>
 
                 <div class="projects-grid">
-                    <!-- Project 1: SmartHireX -->
-                    <div class="project-card featured-project">
-                        <div class="project-badge">Production System &bull; Flagship</div>
+                    <!-- Project 1: AI-Recruitment Platform & Agentic HRMS -->
+                    <div class="project-card featured-project" data-category="ai">
+                        <div class="project-badge">Production Systems &bull; Flagship</div>
                         <div class="project-header">
-                            <h3 class="project-title">SmartHireX &mdash; AI Recruitment Intelligence</h3>
+                            <h3 class="project-title">AI-Recruitment Platform & Agentic HRMS</h3>
                             <div class="project-links">
                                 <a href="#experience" class="icon-link" title="View Experience Architecture"><i class="fa-solid fa-circle-info"></i></a>
                             </div>
                         </div>
                         <p class="project-desc">
-                            End-to-end recruitment intelligence platform integrating Google Vertex AI (Gemini) and IBM Watsonx Orchestrate. Automates candidate semantic matching, multi-format CV parsing with OCR fallback, applicant scorecard generation, and CEIPAL ATS synchronization.
+                            End-to-end AI recruitment intelligence platform and agentic HRMS integrating Google Vertex AI (Gemini) and IBM Watsonx Orchestrate. Automates candidate semantic matching, multi-format CV parsing with OCR fallback, applicant scorecard generation, and CEIPAL ATS synchronization.
                         </p>
                         <div class="project-highlights">
                             <span><i class="fa-solid fa-check"></i> Semantic scoring & explainable hiring insights</span>
@@ -524,7 +589,7 @@
                     </div>
 
                     <!-- Project 2: AQI Estimator -->
-                    <div class="project-card">
+                    <div class="project-card" data-category="ai">
                         <div class="project-badge">Machine Learning & Analytics</div>
                         <div class="project-header">
                             <h3 class="project-title">AQI Estimator</h3>
@@ -559,7 +624,7 @@
                     </div>
 
                     <!-- Project 3: Gallarie -->
-                    <div class="project-card">
+                    <div class="project-card" data-category="frontend">
                         <div class="project-badge">Frontend Engineering</div>
                         <div class="project-header">
                             <h3 class="project-title">Gallarie &mdash; Image Discovery Engine</h3>
@@ -593,7 +658,7 @@
                     </div>
 
                     <!-- Project 4: Climate Pulse -->
-                    <div class="project-card">
+                    <div class="project-card" data-category="frontend">
                         <div class="project-badge">Weather Platform</div>
                         <div class="project-header">
                             <h3 class="project-title">Climate Pulse</h3>
@@ -627,7 +692,7 @@
                     </div>
 
                     <!-- Project 5: Online Reservation System -->
-                    <div class="project-card">
+                    <div class="project-card" data-category="backend">
                         <div class="project-badge">Backend & Systems</div>
                         <div class="project-header">
                             <h3 class="project-title">Online Reservation System</h3>
@@ -661,7 +726,7 @@
                     </div>
 
                     <!-- Project 6: More Repositories Card -->
-                    <div class="project-card more-card">
+                    <div class="project-card more-card" data-category="all">
                         <div class="more-content">
                             <div class="more-icon"><i class="fa-brands fa-github"></i></div>
                             <h3 class="project-title">More Open Source Projects</h3>
@@ -775,6 +840,40 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Aesthetic Dedicated CV Showcase Banner Card -->
+                <div class="cv-showcase-card">
+                    <div class="cv-showcase-glow"></div>
+                    <div class="cv-showcase-content">
+                        <div class="cv-showcase-icon">
+                            <i class="fa-solid fa-file-pdf"></i>
+                        </div>
+                        <div class="cv-showcase-text">
+                            <div class="cv-badge"><span class="pulse-dot"></span> Official Document &bull; Verified 2026</div>
+                            <h3 class="cv-title">Curriculum Vitae — Anmol Srivastava</h3>
+                            <p class="cv-desc">Complete professional record detailing production AI deployments at Intellismith, microservices engineering at CDAC, tech stack, and academic background.</p>
+                            <div class="cv-meta">
+                                <span><i class="fa-solid fa-file-lines"></i> PDF Format</span>
+                                <span><i class="fa-solid fa-weight-hanging"></i> 244 KB</span>
+                                <span><i class="fa-solid fa-check-double"></i> ATS Optimized</span>
+                            </div>
+                        </div>
+                        <div class="cv-showcase-actions">
+                            <button id="banner-cv-preview-btn" class="btn btn-primary">
+                                <i class="fa-solid fa-eye"></i>
+                                <span>Interactive Preview</span>
+                            </button>
+                            <a href="./Anmol_Srivastava_Resume.pdf" download="Anmol_Srivastava_Resume.pdf" class="btn btn-secondary">
+                                <i class="fa-solid fa-download"></i>
+                                <span>Download PDF</span>
+                            </a>
+                            <button id="copy-cv-url-btn" class="btn btn-outline" title="Copy Resume Link">
+                                <i class="fa-solid fa-link"></i>
+                                <span>Copy Link</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -872,7 +971,7 @@
         <div class="footer-container">
             <div class="footer-top">
                 <div class="footer-brand">
-                    <span class="logo-name">Anmol</span><span class="logo-dot">.</span><span class="logo-role">ai</span>
+                    <span class="logo-name">Anmol Srivastava</span>
                     <p>Full Stack AI Engineer specializing in LLMs, agentic systems, and cloud-native applications.</p>
                 </div>
                 <div class="footer-links">
@@ -902,10 +1001,42 @@
         </div>
     </footer>
 
+    <!-- ========================= CV PREVIEW MODAL ========================= -->
+    <div id="cv-modal" class="modal-overlay" aria-hidden="true" role="dialog" aria-labelledby="cv-modal-title">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div class="modal-title-group">
+                    <div class="modal-pdf-badge"><i class="fa-solid fa-file-pdf"></i></div>
+                    <div>
+                        <h3 id="cv-modal-title" class="modal-title">Anmol Srivastava — Resume</h3>
+                        <span class="modal-subtitle">Full Stack AI Engineer &bull; Verified PDF Document</span>
+                    </div>
+                </div>
+                <div class="modal-header-actions">
+                    <button id="modal-copy-link-btn" class="modal-action-btn" title="Copy Resume Link">
+                        <i class="fa-solid fa-link"></i>
+                        <span>Copy Link</span>
+                    </button>
+                    <a href="./Anmol_Srivastava_Resume.pdf" download="Anmol_Srivastava_Resume.pdf" class="modal-action-btn primary" title="Download PDF">
+                        <i class="fa-solid fa-download"></i>
+                        <span>Download PDF</span>
+                    </a>
+                    <button id="close-cv-modal" class="modal-close-btn" aria-label="Close CV Preview">
+                        <i class="fa-solid fa-xmark"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="modal-body">
+                <iframe src="./Anmol_Srivastava_Resume.pdf" title="Anmol Srivastava Resume Preview" class="cv-iframe"></iframe>
+            </div>
+        </div>
+    </div>
+
     <!-- Toast Notification -->
     <div id="toast" class="toast"></div>
 
-    <!-- JavaScript -->
+    <!-- 3D Graphics Library (Three.js) & App Script -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
